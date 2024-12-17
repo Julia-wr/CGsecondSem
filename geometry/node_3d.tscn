@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=4 uid="uid://dy6mvmdyy6sdw"]
+
+[ext_resource type="Script" path="res://barrel.gd" id="1_igp1o"]
+[ext_resource type="Script" path="res://prog_mesh.gd" id="1_wmrc1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8f7gi"]
+
+[sub_resource type="Sky" id="Sky_rn7l6"]
+sky_material = SubResource("ProceduralSkyMaterial_8f7gi")
+
+[sub_resource type="Environment" id="Environment_5tw00"]
+background_mode = 2
+sky = SubResource("Sky_rn7l6")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_snkwk"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -0.866025, 2, 1, 1.73205),
+"format": 34359742471,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAYAAQACAAYAAgADAAYAAwAEAAYABAAFAAYABQAAAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 7,
+"vertex_data": PackedByteArray("AACAPwAAgD8AAAAAAAAAPwAAgD/Xs10/AAAAvwAAgD/Xs10/AACAvwAAgD8AMA0lAAAAvwAAgD/Xs12/AAAAPwAAgD/Xs12/AAAAAAAAAAAAAAAA/3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/78=")
+}, {
+"aabb": AABB(-1, -1, -0.866025, 2, 2, 1.73205),
+"format": 34359742471,
+"index_count": 36,
+"index_data": PackedByteArray("AwACAAAAAwAAAAEABQAEAAIABQACAAMABwAGAAQABwAEAAUACQAIAAYACQAGAAcACwAKAAgACwAIAAkAAQAAAAoAAQAKAAsA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("AACAPwAAgD8AAAAAAACAPwAAgL8AAAAAAAAAPwAAgD/Xs10/AAAAPwAAgL/Xs10/AAAAvwAAgD/Xs10/AAAAvwAAgL/Xs10/AACAvwAAgD8AMA0lAACAvwAAgL8AMA0lAAAAvwAAgD/Xs12/AAAAvwAAgL/Xs12/AAAAPwAAgD/Xs12/AAAAPwAAgL/Xs12/AAAAAAAAgL8AAAAA////f/9//7////9//3//v9mu/39SWYCe2a7/f1JZgJ4lUf9/rKaAniVR/3+spoCeAAD/f/9//78AAP9//3//vwAAJdFSWYCeAAAl0VJZgJ7//yXRrKaAnv//JdGspoCe/38AAAAA/78=")
+}]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5tw00")
+
+[node name="Camera3D" type="Camera3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.39512)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.59854, 0)
+
+[node name="Barrel" type="Node3D" parent="WorldEnvironment"]
+script = ExtResource("1_igp1o")
+
+[node name="ProgMesh" type="MeshInstance3D" parent="WorldEnvironment/Barrel"]
+mesh = SubResource("ArrayMesh_snkwk")
+skeleton = NodePath("../../..")
+script = ExtResource("1_wmrc1")

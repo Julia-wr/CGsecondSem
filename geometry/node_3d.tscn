@@ -12,7 +12,7 @@ sky_material = SubResource("ProceduralSkyMaterial_8f7gi")
 background_mode = 2
 sky = SubResource("Sky_rn7l6")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_snkwk"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_2d8eu"]
 _surfaces = [{
 "aabb": AABB(-1, 0, -0.866025, 2, 1, 1.73205),
 "format": 34359742471,
@@ -22,6 +22,15 @@ _surfaces = [{
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 7,
 "vertex_data": PackedByteArray("AACAPwAAgD8AAAAAAAAAPwAAgD/Xs10/AAAAvwAAgD/Xs10/AACAvwAAgD8AMA0lAAAAvwAAgD/Xs12/AAAAPwAAgD/Xs12/AAAAAAAAAAAAAAAA/3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/78=")
+}, {
+"aabb": AABB(-1, -1, -0.866025, 2, 1e-05, 1.73205),
+"format": 34359742471,
+"index_count": 18,
+"index_data": PackedByteArray("AQAAAAYAAgABAAYAAwACAAYABAADAAYABQAEAAYAAAAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 7,
+"vertex_data": PackedByteArray("AACAPwAAgL8AAAAAAAAAPwAAgL/Xs10/AAAAvwAAgL/Xs10/AACAvwAAgL8AMA0lAAAAvwAAgL/Xs12/AAAAPwAAgL/Xs12/AAAAAAAAgL8AAAAA/38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/78=")
 }, {
 "aabb": AABB(-1, -1, -0.866025, 2, 2, 1.73205),
 "format": 34359742471,
@@ -48,6 +57,10 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.5
 script = ExtResource("1_igp1o")
 
 [node name="ProgMesh" type="MeshInstance3D" parent="WorldEnvironment/Barrel"]
-mesh = SubResource("ArrayMesh_snkwk")
+mesh = SubResource("ArrayMesh_2d8eu")
 skeleton = NodePath("../../..")
 script = ExtResource("1_wmrc1")
+radius = 1
+rings = null
+radial_segments = null
+barrel_width = null

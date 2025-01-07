@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://cv72atmpk2787"]
+
+[ext_resource type="Script" path="res://runnertile.gd" id="1_dihjn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_35aos"]
+size = Vector3(10, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_steae"]
+albedo_color = Color(0.690493, 0.265861, 0.294552, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u8qlc"]
+material = SubResource("StandardMaterial3D_steae")
+size = Vector3(10, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j0aio"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6yla0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_husb5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tnc3x"]
+albedo_color = Color(0.811951, 0.737239, 0.355589, 1)
+metallic = 0.9
+roughness = 0.45
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_g0n6m"]
+material = SubResource("StandardMaterial3D_tnc3x")
+height = 0.1
+
+[node name="Runnertile_1" type="Node3D"]
+script = ExtResource("1_dihjn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3498, 8.14656, -1.75253)
+light_energy = 0.162
+light_indirect_energy = 1.646
+light_volumetric_fog_energy = 0.192
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_35aos")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_u8qlc")
+
+[node name="Obstacle" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.22298, 0.55905, -3.83346)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle"]
+shape = SubResource("BoxShape3D_j0aio")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle"]
+mesh = SubResource("BoxMesh_6yla0")
+
+[node name="Obstacle2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.04318, 0.55905, 1.9843)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle2"]
+shape = SubResource("BoxShape3D_j0aio")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle2"]
+mesh = SubResource("BoxMesh_6yla0")
+
+[node name="Obstacle3" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102727, 0.55905, 4.11928)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle3"]
+shape = SubResource("BoxShape3D_j0aio")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle3"]
+mesh = SubResource("BoxMesh_6yla0")
+
+[node name="Coin" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.170273, 0.559, -0.631222)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Coin"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_husb5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Coin"]
+mesh = SubResource("CylinderMesh_g0n6m")
+
+[connection signal="body_entered" from="Obstacle" to="." method="_on_obstacle_body_entered"]
+[connection signal="body_entered" from="Obstacle2" to="." method="_on_obstacle_body_entered"]
+[connection signal="body_entered" from="Obstacle3" to="." method="_on_obstacle_body_entered"]
+[connection signal="body_entered" from="Coin" to="." method="_on_coin_body_entered"]

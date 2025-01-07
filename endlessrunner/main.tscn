@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3 uid="uid://bscqr52321esk"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_5puvc"]
+[ext_resource type="PackedScene" uid="uid://cv72atmpk2787" path="res://runnertile_1.tscn" id="2_42c2w"]
+[ext_resource type="Script" path="res://player.gd" id="2_ube4h"]
+[ext_resource type="PackedScene" uid="uid://noc0t13t8po4" path="res://runnertile_2.tscn" id="3_re3wk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1oehj"]
+
+[sub_resource type="Sky" id="Sky_42yxr"]
+sky_material = SubResource("ProceduralSkyMaterial_1oehj")
+
+[sub_resource type="Environment" id="Environment_0p8w2"]
+background_mode = 2
+sky = SubResource("Sky_42yxr")
+ambient_light_source = 3
+ambient_light_energy = 3.69
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j0765"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_5puvc")
+tiles = Array[PackedScene]([ExtResource("2_42c2w"), ExtResource("3_re3wk")])
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.08501, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0p8w2")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.256377, 0)
+script = ExtResource("2_ube4h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.789146, 0)
+shape = SubResource("CapsuleShape3D_j0765")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53072, 1.15293)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false

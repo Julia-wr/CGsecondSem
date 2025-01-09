@@ -4,7 +4,11 @@ extends Node3D
 @export var tile_length = 20.0
 @export var tile_rim = 5.0
 
+var coins = 0 as int
+
 var cur_tile_center = tile_length / 2
+
+var start = false
 
 var cur_tile : Node3D
 var last_tile : Node3D
@@ -22,22 +26,25 @@ func spawn_next_tile() -> Node3D:
 	return tile_node
 
 func kill_tile(tile: Node3D):
-	tile.obstacle_hit.disconnect(on_obstacle_hit())
-	tile.coins_earned.disconnnect(on_coins_earned())
+	#tile.obstacle_hit.disconnect(on_obstacle_hit())
+	#tile.coins_earned.disconnnect(on_coins_earned())
 	remove_child(tile)
 	tile.queue_free()
 
-func on_obstacle_hit():
+func on_obstacle_hit() -> void:
 	print("Obstacle hit")
-	
 
-func on_coins_earned():
-	print("Money")
+func on_coins_earned() -> void:
+	coins = 1 + coins
+	print("Coin earned you now have " + str(coins))
+
+func dead():
+	get_tree().reload_current_scene()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	cur_tile = spawn_next_tile()
-
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

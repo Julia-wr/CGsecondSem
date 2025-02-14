@@ -1,0 +1,94 @@
+[gd_scene load_steps=17 format=3 uid="uid://bscqr52321esk"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_5puvc"]
+[ext_resource type="PackedScene" uid="uid://cv72atmpk2787" path="res://runnertile_1.tscn" id="2_42c2w"]
+[ext_resource type="Script" path="res://player.gd" id="2_ube4h"]
+[ext_resource type="PackedScene" uid="uid://noc0t13t8po4" path="res://runnertile_2.tscn" id="3_re3wk"]
+[ext_resource type="PackedScene" uid="uid://qxcy80vpj1ds" path="res://runnertile_3.tscn" id="4_no654"]
+[ext_resource type="PackedScene" uid="uid://ddch35v72m2ow" path="res://runnertile_4.tscn" id="5_0phpn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1oehj"]
+
+[sub_resource type="Sky" id="Sky_42yxr"]
+sky_material = SubResource("ProceduralSkyMaterial_1oehj")
+
+[sub_resource type="Environment" id="Environment_0p8w2"]
+background_mode = 2
+sky = SubResource("Sky_42yxr")
+ambient_light_source = 3
+ambient_light_energy = 3.69
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_yljra"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1tjnx"]
+font_size = 25
+outline_color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j0765"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vn1xo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qo7h2"]
+size = Vector3(10, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2qe6"]
+albedo_color = Color(0.84069, 0.821424, 0.862765, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fql01"]
+material = SubResource("StandardMaterial3D_c2qe6")
+size = Vector3(10, 1, 20)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_5puvc")
+tiles = Array[PackedScene]([ExtResource("2_42c2w"), ExtResource("3_re3wk"), ExtResource("4_no654"), ExtResource("5_0phpn")])
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.08501, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0p8w2")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07602, -1.16134)
+visible = false
+texture = SubResource("ViewportTexture_yljra")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+size = Vector2i(285, 27)
+
+[node name="Label" type="Label" parent="Sprite3D/SubViewport"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Press space bar to start"
+label_settings = SubResource("LabelSettings_1tjnx")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("2_ube4h")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53072, 3.47755)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_j0765")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_vn1xo")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+
+[node name="Floor2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2"]
+shape = SubResource("BoxShape3D_qo7h2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2"]
+mesh = SubResource("BoxMesh_fql01")

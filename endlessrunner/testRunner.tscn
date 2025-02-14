@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://4m0vet8pogab"]
+
+[ext_resource type="PackedScene" uid="uid://bgx1agtr11pal" path="res://untitled.blend" id="1_1k0js"]
+
+[node name="TestRunner" type="Node3D"]
+
+[node name="Area3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0125222, 1.19209e-07, -0.080231)
+
+[node name="untitled" parent="Area3D" instance=ExtResource("1_1k0js")]

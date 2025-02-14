@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var tiles: Array[PackedScene]
-@export var tile_length = 20.0
+@export var tile_length = 40.0
 @export var tile_rim = 5.0
 
 var coins = 0 as int
@@ -33,6 +33,7 @@ func kill_tile(tile: Node3D):
 
 func on_obstacle_hit() -> void:
 	print("Obstacle hit")
+	dead()
 
 func on_coins_earned() -> void:
 	coins = 1 + coins
@@ -48,7 +49,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if $Player.position.z < cur_tile_center - tile_length/2 + tile_rim:
+	if $Player.position.z < cur_tile_center - tile_length/6 + tile_rim:
 		if(last_tile != null):
 			kill_tile(last_tile)
 		last_tile = cur_tile

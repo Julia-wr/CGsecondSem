@@ -3,14 +3,14 @@
 [ext_resource type="Script" path="res://runnertile.gd" id="1_5xwa6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ryrkc"]
-size = Vector3(10, 1, 20)
+size = Vector3(10, 1, 40)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pllpb"]
 albedo_color = Color(0.238939, 0.49317, 0.277325, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ijm5n"]
 material = SubResource("StandardMaterial3D_pllpb")
-size = Vector3(10, 1, 20)
+size = Vector3(10, 1, 40)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ck8j2"]
 
@@ -101,9 +101,19 @@ shape = SubResource("BoxShape3D_whknd")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle4"]
 mesh = SubResource("BoxMesh_uqqux")
 
+[node name="Obstacle5" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94443, 0.55905, 13.6894)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle5"]
+shape = SubResource("BoxShape3D_6rd6w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle5"]
+mesh = SubResource("BoxMesh_vki31")
+
 [connection signal="body_entered" from="Coin" to="." method="_on_coin_body_entered"]
 [connection signal="body_entered" from="Coin2" to="." method="_on_coin_body_entered"]
 [connection signal="body_entered" from="Obstacle" to="." method="_on_obstacle_body_entered"]
 [connection signal="body_entered" from="Obstacle2" to="." method="_on_obstacle_body_entered"]
 [connection signal="body_entered" from="Obstacle3" to="." method="_on_obstacle_body_entered"]
 [connection signal="body_entered" from="Obstacle4" to="." method="_on_obstacle_body_entered"]
+[connection signal="body_entered" from="Obstacle5" to="." method="_on_obstacle_body_entered"]
